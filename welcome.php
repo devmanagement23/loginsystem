@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+//checking you are in session or not
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
+      //if means your are not logged in then forward to login page
+
+      header("location:login.php");
+      exit; 
+}
+
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,10 +22,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Welcome</title>
+    <title>Welcome - <?php $_SESSION['username']?></title>
   </head>
   <body>
     <?php require 'partials/_navbar.php'?>
+
+    Welcome - <?php echo $_SESSION['username']?>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
