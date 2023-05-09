@@ -16,6 +16,12 @@
     
     if($num == 1){
       $login = true;
+
+      //starting the session
+      session_start();
+      $_SESSION['loggedin'] = true;
+      $_SESSION['username'] = $username;
+      header("location:welcome.php");
     }    
     else{
       $showError = "Invalid Credentials";
