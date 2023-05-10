@@ -95,11 +95,11 @@
         <form action="/loginsystem/signup.php" method="POST">
             <div class="form-group col-md-6" >
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+                <input type="text" maxlength="11" class="form-control" id="username" name="username" aria-describedby="emailHelp">
             </div>
             <div class="form-group col-md-6">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <input type="password" maxlength="11" class="form-control" id="password" name="password">
             </div>
             <div class="form-group col-md-6">
                 <label for="cpassword">Confirm Password</label>

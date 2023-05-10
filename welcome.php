@@ -32,9 +32,21 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
     <title>Welcome - <?php echo $_SESSION['username']?></title>
   </head>
   <body>
-    <?php require 'partials/_navbar.php'?>
+    <?php require 'partials/_navbar.php'?>    
 
-    Welcome - <?php echo $_SESSION['username']?>
+    <div class="container my-3" >
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Welcome - <?php echo $_SESSION['username']?></h4>
+        <p>Hey, how are you doing? Welcome to digiSecure. You are logged in as
+        - <?php echo $_SESSION['username']?>. You are reading this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+        <hr>
+        <p class="mb-0">Whenever you need to, be sure to use this link to <a href="/loginsystem/logout.php">logout </a>.</p>
+      </div>
+    </div>
+
+
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
