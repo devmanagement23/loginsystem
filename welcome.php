@@ -1,7 +1,14 @@
 <?php
+// ------------------------------------------- 5 entering to welcome page after login ---------------------
+
 session_start();
 
-//checking you are in session or not
+//checking you are in session or not   ------------- logic is session variables loggedin is only set when you 
+                                                //   visit login page , if you directly come to welcome page
+                                                //  it means loggedin variable is not set true and you are 
+                                                // forwarded to login page , if values set than you can see 
+                                                // content of the the welcome page .
+
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
       //if means your are not logged in then forward to login page
 
@@ -11,7 +18,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
 
 ?>
 
-
+                 <!-- ----------------------   6 welcome page content ----------------------- -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -22,7 +29,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Welcome - <?php $_SESSION['username']?></title>
+    <title>Welcome - <?php echo $_SESSION['username']?></title>
   </head>
   <body>
     <?php require 'partials/_navbar.php'?>

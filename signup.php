@@ -2,32 +2,51 @@
    $showAlert = false;
    $showError = false;
 
+  //  --------------------------- 2  getting form value and entering into database ---------------------
+
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     
+    // ------database connection page ----------
     include 'partials/_dbconnect.php';
 
+    // ---------- getting html values-----------
     $username = $_POST["username"];
     $password = $_POST["password"];
     $cpassword = $_POST["cpassword"];    
 
-    if(($password == $cpassword) && $exists == false){
-      
-      $sql = "INSERT INTO users(username,password,dt) VALUES('$username','$password',current_timestamp())";
+    // checking if username is already in database
+    $existSql = "SELECT * FROM users WHERE username ='$username'";
+    $result2 = mysqli_query($conn,$existSql);
+    $numExistRows = mysqli_num_rows($result2);
 
-      $result = mysqli_query($conn,$sql);
+    if($numExistRows > 0){
 
-      if($result){
-        $showAlert = true;
-      }
+      $showError = "Username Already exists";
 
     }
-    else{
-      $showError = "Password do-not match";
+    else{   
+                                  // -------------  if new username, then enter into database -------------
+
+      if(($password == $cpassword)){
+        
+        $sql = "INSERT INTO users(username,password,dt) VALUES('$username','$password',current_timestamp())";
+
+        $result = mysqli_query($conn,$sql);
+
+        if($result){
+          $showAlert = true;      // this true will show green alert bar
+        }
+
+      }
+      else{
+        $showError = "Password do-not match";
+      }
     }
 
   }
 ?>
 
+                      <!-- ------------------------------------  1 html signup form ---------------------------------- -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -49,7 +68,6 @@
 
     <?php
 
-    
     if($showAlert){
 
       echo'<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -87,10 +105,10 @@
                 <label for="cpassword">Confirm Password</label>
                 <input type="password" class="form-control" id="cpassword" name="cpassword">
                 <small id="emailHelp" class="form-text text-muted">Make sure to type the same password.</small>
-            </div>
-            
+            </div>            
 
             <button type="submit" class="btn btn-primary  col-md-6">SignUp</button>
+
         </form>
     </div>
 

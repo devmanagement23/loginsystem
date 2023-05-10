@@ -2,13 +2,14 @@
    $login = false;
    $showError = false;
 
+  //  --------------------------------------- 4 getting form value and query database for login ---------------
+
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     include 'partials/_dbconnect.php';
 
     $username = $_POST["username"];
-    $password = $_POST["password"];
-    
+    $password = $_POST["password"];    
   
     $sql = "SELECT * from users WHERE username ='$username' AND password = '$password'";
     $result = mysqli_query($conn,$sql);
@@ -30,6 +31,7 @@
   }
 ?>
 
+<!-- ---------------------------------------- 3 login form ---------------------------- -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -50,7 +52,6 @@
     <?php require 'partials/_navbar.php'?>
 
     <?php
-
     
     if($login){
 

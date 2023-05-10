@@ -1,0 +1,1 @@
+1.duplicate entry - username in database  --- go to phpmyadmin -  go to structure --- make username UNIQUE. 
