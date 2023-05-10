@@ -29,7 +29,10 @@
 
       if(($password == $cpassword)){
         
-        $sql = "INSERT INTO users(username,password,dt) VALUES('$username','$password',current_timestamp())";
+        // generate password hash
+        $hash = password_hash($password,PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO users(username,password,dt) VALUES('$username','$hash',current_timestamp())";
 
         $result = mysqli_query($conn,$sql);
 

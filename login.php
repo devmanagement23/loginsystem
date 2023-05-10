@@ -11,18 +11,34 @@
     $username = $_POST["username"];
     $password = $_POST["password"];    
   
-    $sql = "SELECT * from users WHERE username ='$username' AND password = '$password'";
+              // see two logics for login 1.compare the input values with the database value to login. OR
+              //                          2.Check if input value is present in database or not.
+              //   we use 2nd logic for login -- as only user know values , and if entered values are present in database then
+                                                         // then it is acutally the user who is created through signup page
+//  $sql = "SELECT * from users WHERE username ='$username' AND password = '$password'";
+    $sql = "SELECT * from users WHERE username ='$username'";
     $result = mysqli_query($conn,$sql);
     $num = mysqli_num_rows($result);
     
     if($num == 1){
-      $login = true;
+      while($row=mysqli_fetch_assoc($result)){
+        if(password_verify($password,$row['password'])){
 
-      //starting the session
-      session_start();
-      $_SESSION['loggedin'] = true;
-      $_SESSION['username'] = $username;
-      header("location:welcome.php");
+          $login = true;
+
+          //starting the session
+          session_start();
+          $_SESSION['loggedin'] = true;
+          $_SESSION['username'] = $username;
+          header("location:welcome.php");
+
+        }
+        else{
+          $showError = "Invalid Credentials";
+        }
+        
+      }
+
     }    
     else{
       $showError = "Invalid Credentials";
